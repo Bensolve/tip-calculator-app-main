@@ -1,44 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <!-- Responsive viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Basic description for SEO -->
+  <meta name="description" content="A simple tip calculator for splitting bills.">
+  <meta property="og:title" content="Tip Calculator App">
+  <meta property="og:description" content="Easily calculate tips and split bills per person.">
+  <meta property="og:image" content="./images/preview.jpg">
+
+  <!-- Content Security Policy: restrict sources to own origin and data for images -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+
+
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <!-- Google Fonts: Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+
+
+  <script src="./script.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
   <title>Frontend Mentor | Tip calculator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
+
 <body>
+  <header class="header" role="banner">
+    <img src="./images/logo.svg" class="header__logo" alt="Splitter logo" width="90" height="30" decoding="async">
+  </header>
 
-  Bill
+  <!-- Main application container -->
 
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
+  <main class="main" id="main" role="main" aria-labelledby="app-title">
+    <!-- Application container matching desktop card layout -->
+    <section class="calculator" aria-labelledby="app-title" id="calculator">
+      <h1 id="app-title" class="sr-only">Tip calculator app interface</h1>
 
-  Number of People
+      <!-- Left side: Input form -->
+      <form class="calculator__form" id="tip-form" action="#" method="post" novalidate>
+        <!-- Bill field -->
+        <fieldset class="calculator__fieldset calculator__fieldset--bill" aria-labelledby="bill-label">
+          <legend class="sr-only">Bill</legend>
 
-  Tip Amount
-  / person
+          <label for="bill" id="bill-label" class="calculator__label">Bill</label>
 
-  Total
-  / person
+          <div class="calculator__input-wrapper">
+            <img src="./images/icon-dollar.svg" class="calculator__icon" alt="" aria-hidden="true" width="16"
+              height="16" decoding="async" />
 
-  Reset
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+            <input id="bill" name="bill" class="calculator__input calculator__input--bill" type="number"
+              inputmode="decimal" placeholder="0" min="0" step="0.01" aria-label="Bill amount" required
+              autocomplete="off" />
+          </div>
+        </fieldset>
+
+
+        <!-- Tip selection -->
+        <fieldset class="calculator__fieldset calculator__fieldset--tip" aria-labelledby="tip-legend">
+          <legend id="tip-legend" class="calculator__legend">Select Tip %</legend>
+
+          <div class="calculator__tip-options" role="radiogroup" aria-label="Tip percentage">
+            <label class="calculator__tip-option">
+              <input class="calculator__radio" name="tip" type="radio" value="5" />
+              <span class="calculator__tip-label">5%</span>
+            </label>
+
+            <label class="calculator__tip-option">
+              <input class="calculator__radio" name="tip" type="radio" value="10" />
+              <span class="calculator__tip-label">10%</span>
+            </label>
+
+            <label class="calculator__tip-option">
+              <input class="calculator__radio" name="tip" type="radio" value="15" />
+              <span class="calculator__tip-label">15%</span>
+            </label>
+
+            <label class="calculator__tip-option">
+              <input class="calculator__radio" name="tip" type="radio" value="25" />
+              <span class="calculator__tip-label">25%</span>
+            </label>
+
+            <label class="calculator__tip-option">
+              <input class="calculator__radio" name="tip" type="radio" value="50" />
+              <span class="calculator__tip-label">50%</span>
+            </label>
+
+            <div class="calculator__tip-option calculator__tip-option--custom">
+              <input class="calculator__input calculator__input--custom" type="number" inputmode="decimal"
+                placeholder="Custom" min="0" step="1" aria-label="Custom tip percentage" />
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- Number of People -->
+        <fieldset class="calculator__fieldset calculator__fieldset--people calculator__fieldset--error"
+          aria-labelledby="people-label">
+          <legend class="sr-only">Number of people</legend>
+
+          <div class="calculator__label-row">
+            <label for="people" id="people-label" class="calculator__label">Number of People</label>
+            <span class="calculator__error" id="people-error" aria-live="polite">Can’t be zero</span>
+          </div>
+
+          <input id="people" name="people" class="calculator__input calculator__input--people calculator__input--error"
+            type="number" inputmode="numeric" placeholder="0" min="1" step="1" aria-describedby="people-error"
+            aria-label="Number of people" required autocomplete="off" />
+        </fieldset>
+
+
+
+
+      </form>
+
+      <!-- Right side: Results panel -->
+      <aside class="calculator__results" aria-labelledby="results-heading" role="complementary">
+        <div class="calculator__results-group">
+          <!-- Tip Amount / person -->
+          <div class="calculator__result calculator__result--tip">
+            <div class="calculator__result-meta">
+              <p class="calculator__result-label">Tip Amount</p>
+              <p class="calculator__result-sub">/ person</p>
+            </div>
+            <output id="tip-amount" class="calculator__output calculator__output--tip" aria-live="polite">$0.00</output>
+          </div>
+
+          <!-- Total / person -->
+          <div class="calculator__result calculator__result--total">
+            <div class="calculator__result-meta">
+              <p class="calculator__result-label">Total</p>
+              <p class="calculator__result-sub">/ person</p>
+            </div>
+            <output id="total-amount" class="calculator__output calculator__output--total"
+              aria-live="polite">$0.00</output>
+          </div>
+        </div>
+
+        <!-- Reset button -->
+        <div class="calculator__controls" role="group" aria-label="App actions">
+          <button type="reset" class="calculator__button calculator__button--reset" id="reset-button">Reset</button>
+        </div>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- Footer / attribution (kept, secure links) -->
+  <footer class="attribution" role="contentinfo">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>.
+    Coded by <a href="#" rel="noopener noreferrer">Your Name Here</a>.
+  </footer>
+
+  <!-- Helpful note for developers:
+       - No inline scripts or event handlers included.
+       - IDs used only for label association and future script hooks (bill, tip-*, tip-custom, people, tip-amount, total-amount, reset-button).
+       - Add CSS later to implement the desktop layout and responsive behavior (mobile design will reuse these semantics).
+       - Use BEM classes for styling: calculator, calculator__form, calculator__fieldset, calculator__input, etc.
+  -->
+
+  <!-- Optionally include an external script file later, e.g.:
+       <script src="./js/app.js" defer></script>
+       (defer recommended; keep CSP in mind)
+  -->
 </body>
+
 </html>
