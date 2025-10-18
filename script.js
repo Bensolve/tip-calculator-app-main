@@ -1,5 +1,5 @@
 // ================================
-// Tip Calculator – Modern JS (Live Update)
+// Tip Calculator – Modern JS (Live Update + Polished)
 // ================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,11 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
       tipAmountOutput.textContent = "$0.00";
       totalAmountOutput.textContent = "$0.00";
     }
+    toggleReset(); // Update reset button state
+  };
+
+  // ====== Helper: Toggle Reset Button ======
+  const toggleReset = () => {
+    const active = billValue || tipPercent || peopleCount > 1;
+    resetButton.disabled = !active;
   };
 
   // ====== Handle bill input ======
   billInput.addEventListener("input", () => {
     billValue = parseFloat(billInput.value) || 0;
+    if (billValue < 0) billValue = 0;
     calculate();
   });
 
@@ -47,17 +55,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorText = document.getElementById("people-error");
     const value = parseInt(peopleInput.value, 10);
 
-    if (value === 0 || peopleInput.value.trim() === "") {
+    if (value <= 0 || peopleInput.value.trim() === "") {
       fieldset.classList.add("calculator__fieldset--error");
       peopleInput.classList.add("calculator__input--error");
+      peopleInput.setAttribute("aria-invalid", "true");
       errorText.style.display = "inline";
       peopleCount = 0;
     } else {
       fieldset.classList.remove("calculator__fieldset--error");
       peopleInput.classList.remove("calculator__input--error");
+      peopleInput.removeAttribute("aria-invalid");
       errorText.style.display = "none";
       peopleCount = value;
     }
+
+    if (peopleCount < 0) peopleCount = 1;
     calculate();
   });
 
@@ -65,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   tipRadios.forEach((radio) => {
     radio.addEventListener("change", () => {
       tipPercent = parseFloat(radio.value);
+      if (tipPercent < 0) tipPercent = 0;
       customTipInput.value = ""; // clear custom field if a preset tip is picked
       calculate();
     });
@@ -73,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ====== Handle custom tip input ======
   customTipInput.addEventListener("input", () => {
     tipPercent = parseFloat(customTipInput.value) || 0;
+    if (tipPercent < 0) tipPercent = 0;
     tipRadios.forEach((radio) => (radio.checked = false)); // uncheck preset tips
     calculate();
   });
@@ -92,9 +106,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const fieldset = peopleInput.closest(".calculator__fieldset");
     fieldset.classList.remove("calculator__fieldset--error");
     peopleInput.classList.remove("calculator__input--error");
+    peopleInput.removeAttribute("aria-invalid");
     document.getElementById("people-error").style.display = "none";
 
     tipAmountOutput.textContent = "$0.00";
     totalAmountOutput.textContent = "$0.00";
+
+    toggleReset();
   });
+
+  // ====== Initialize ======
+  toggleReset();
 });
