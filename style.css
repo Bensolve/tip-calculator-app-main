@@ -419,7 +419,7 @@ body {
 
 .attribution a {
     color: var(--clr-green-400);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /* ------------------ */
