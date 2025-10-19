@@ -16,6 +16,8 @@
     --clr-grey-50: hsl(189, 47%, 97%);
     --clr-white: hsl(0, 100%, 100%);
 
+    --shadow-card: 0 0.5rem 1.5rem hsl(183, 100%, 15%, 0.1);
+
     /* Font */
     --ff-base: 'Space Mono', monospace;
     --fw-bold: 700;
@@ -34,10 +36,9 @@
 }
 
 html {
-    font-size: 100%;
-    /* 1rem = 16px */
+    font-size: clamp(14px, 1.5vw, 18px);
+    /* minimum 14px, scales with 1.5% of viewport width, maximum 18px */
 }
-
 body {
     font-family: var(--ff-base);
     font-weight: var(--fw-bold);
@@ -119,7 +120,7 @@ body {
     background: var(--clr-white);
     padding: clamp(1.5rem, 2vw + 1rem, 2rem);
     border-radius: 1.5rem;
-    box-shadow: 0 0.5rem 1.5rem hsl(183, 100%, 15%, 0.1);
+    box-shadow: var(--shadow-card);
 }
 
 /* ------------------ */
