@@ -36,8 +36,8 @@
 }
 
 html {
-    font-size: clamp(14px, 1.5vw, 18px);
-    /* minimum 14px, scales with 1.5% of viewport width, maximum 18px */
+font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    /* 0.875rem ≈ 14px, 1.125rem ≈ 18px */
 }
 body {
     font-family: var(--ff-base);
@@ -149,7 +149,7 @@ body {
 .calculator__input {
     width: 100%;
     text-align: right;
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 2vw + 1rem, 1.5rem);
     background-color: var(--clr-grey-50);
     color: var(--clr-green-900);
     padding: 0.5em 0.75em;
@@ -295,7 +295,7 @@ body {
 .calculator__input--custom {
     width: 100%;
     text-align: center;
-    font-size: 1.25rem;
+font-size: clamp(1rem, 1.5vw + 0.75rem, 1.25rem);
     background-color: var(--clr-grey-50);
     color: var(--clr-green-900);
     border: 2px solid transparent;
@@ -349,12 +349,12 @@ body {
 
 .calculator__result-label {
     color: var(--clr-white);
-    font-size: 0.875rem;
+    font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
 }
 
 .calculator__result-sub {
     color: var(--clr-grey-400);
-    font-size: 0.75rem;
+    font-size: clamp(0.75rem, 0.5vw + 0.5rem, 0.875rem);
 }
 
 .calculator__output {
@@ -388,7 +388,7 @@ body {
     background-color: var(--clr-green-400);
     color: var(--clr-green-900);
     text-transform: uppercase;
-    font-size: 1rem;
+font-size: clamp(0.875rem, 1vw + 0.75rem, 1rem);
     border-radius: var(--radius);
     padding-block: 0.75em;
     transition: background-color var(--transition), opacity var(--transition);
@@ -414,7 +414,7 @@ body {
 /* ------------------ */
 .attribution {
     text-align: center;
-    font-size: 0.75rem;
+    font-size: clamp(0.75rem, 0.5vw + 0.5rem, 0.875rem);
     margin-block-start: 2rem;
     color: var(--clr-grey-500);
 }
