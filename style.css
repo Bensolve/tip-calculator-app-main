@@ -176,6 +176,11 @@ body {
     cursor: not-allowed;
 }
 /* Error State (active state design) */
+
+.calculator__input--error {
+    border: 2px solid hsl(12, 100%, 50%);
+    background-color: hsl(0, 100%, 98%);
+}
 .calculator__label-row {
     display: flex;
     justify-content: space-between;
@@ -190,10 +195,6 @@ body {
     /* hidden by default */
 }
 
-.calculator__input--error {
-    border: 2px solid hsl(12, 100%, 50%);
-    background-color: hsl(0, 100%, 98%);
-}
 
 /* When error is active */
 .calculator__fieldset--error .calculator__error {
