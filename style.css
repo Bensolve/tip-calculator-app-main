@@ -230,7 +230,7 @@ body {
 /* Reserve space for the icon */
 .calculator__input--bill,
 .calculator__input--people {
-    padding-left: 2rem;
+    padding-inline-start: 2rem;
 }
 
 /* Subtle animation on focus */
@@ -475,7 +475,7 @@ body {
 
     .calculator__input--bill,
     .calculator__input--people {
-        padding-left: 2.25rem;
+        padding-inline-start: 2.25rem;
     }
 }
 
