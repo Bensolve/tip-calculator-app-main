@@ -33,13 +33,13 @@
 </head>
 
 <body>
-  <header class="header" role="banner">
+  <header class="header">
     <img src="./images/logo.svg" class="header__logo" alt="Splitter logo" width="90" height="30" decoding="async">
   </header>
 
   <!-- Main application container -->
 
-  <main class="main" id="main" role="main" aria-labelledby="app-title">
+  <main class="main" id="main" aria-labelledby="app-title">
     <!-- Application container matching desktop card layout -->
     <section class="calculator" aria-labelledby="app-title" id="calculator">
       <h1 id="app-title" class="sr-only">Tip calculator app interface</h1>
@@ -118,11 +118,12 @@
 
 
 
+        <button type="submit" class="sr-only">Submit</button>
 
       </form>
 
       <!-- Right side: Results panel -->
-      <aside class="calculator__results" aria-labelledby="results-heading" role="complementary">
+      <aside class="calculator__results" aria-labelledby="results-heading">
         <div class="calculator__results-group">
           <!-- Tip Amount / person -->
           <div class="calculator__result calculator__result--tip">
@@ -155,7 +156,7 @@
   </main>
 
   <!-- Footer / attribution (kept, secure links) -->
-  <footer class="attribution" role="contentinfo">
+  <footer class="attribution">
     Challenge by
     <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>.
     Coded by <a href="#" rel="noopener noreferrer">Bensolve</a>.

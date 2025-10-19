@@ -69,14 +69,19 @@ body {
 /* ------------------ */
 /* 2. UTILITIES       */
 /* ------------------ */
+/* Visually hidden but accessible to screen readers */
+
 .sr-only {
-    position: absolute !important;
-    width: 1px;
-    height: 1px;
+    position: absolute;
+    width: 0.0625rem;
+    /* 1px = 1/16rem */
+    height: 0.0625rem;
+    /* same logic */
     padding: 0;
-    margin: -1px;
+    margin: -0.0625rem;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
 }
@@ -157,10 +162,18 @@ body {
     box-shadow: 0 0 0 2px var(--clr-green-400);
 }
 
+
 /* Hover effect for inputs (Bill & People) */
-.calculator__input:hover:not(:disabled):not(.calculator__input--error) {
+.calculator__input:hover {
     box-shadow: 0 0 0 2px var(--clr-grey-400);
     cursor: pointer;
+}
+
+/* Prevent hover effects for disabled or error inputs */
+.calculator__input:disabled,
+.calculator__input--error:hover {
+    box-shadow: none;
+    cursor: not-allowed;
 }
 /* Error State (active state design) */
 .calculator__label-row {
@@ -273,13 +286,7 @@ body {
     color: var(--clr-green-900);
 }
 
-/* Make the Custom button look different from the others */
-.calculator__tip-option--custom .calculator__tip-label {
-    background-color: var(--clr-grey-50);
-    /* light background */
-    color: var(--clr-green-900);
-    /* dark text */
-}
+
 
 
 /* Custom Tip Input */
@@ -291,8 +298,10 @@ body {
     color: var(--clr-green-900);
     border: 2px solid transparent;
     border-radius: var(--radius);
-    transition: border-color var(--transition), box-shadow var(--transition);
     padding-block: 0.5em;
+    transition: border-color var(--transition),
+        box-shadow var(--transition),
+        background-color var(--transition);
 }
 
 /* Placeholder (light gray text) */
@@ -313,23 +322,7 @@ body {
 }
 
 
-/* ------------------ */
-/* Polish: smoother transitions & consistent focus for custom input */
-/* ------------------ */
-.calculator__input--custom {
-    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
-}
 
-.calculator__input--custom:focus-visible {
-    background-color: var(--clr-white);
-    border-color: var(--clr-green-400);
-    box-shadow: 0 0 0 2px var(--clr-green-400);
-}
-
-.calculator__input--custom:hover {
-    background-color: var(--clr-white);
-    border-color: var(--clr-grey-400);
-}
 /* ------------------ */
 /* 5. RESULTS PANEL   */
 /* ------------------ */
@@ -482,5 +475,33 @@ body {
     .calculator__input--bill,
     .calculator__input--people {
         padding-left: 2.25rem;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY: Respect user "prefers-reduced-motion"
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+
+    /* Disable or soften transitions and animations sitewide */
+    *,
+    *::before,
+    *::after {
+        transition: none;
+        animation: none;
+        scroll-behavior: auto;
+    }
+
+    /* Optional: gentle alternative for elements that animate */
+    .calculator__input-wrapper:focus-within .calculator__icon {
+        transform: translateY(-50%);
+        /* no scale pop */
+        opacity: 1;
+        /* keep visible but static */
+    }
+
+    .calculator__button,
+    .calculator__button--reset {
+        transition: opacity 0.1s linear;
     }
 }
